@@ -1,0 +1,5 @@
+Doe, Mohonie, doe_m, 123456, 16B Park Avenue Auckland, 200, 200
+Leanne, Mackenzie, leanne_m, 123456, 423 Great South Road Auckland, 200, 200
+Xavier, Linenmen, xavier_l, 123456, 18C St George's Bay Auckland, 200, 200
+Jane, Zhang, jane_z, 123456, 9 View Road Auckland, 200, 200
+Loru, Donaldson, loru_d, 123456, 88 Karaka Street Auckland, 200, 200

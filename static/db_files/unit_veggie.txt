@@ -1,0 +1,5 @@
+Celery, 1.99, /static/img/celery.jpg
+Broccoli, 1.79, /static/img/broccoli.jpg
+Capsicum, 2.29, /static/img/capsicum.jpg
+Corn, 2.19, /static/img/corn.jpg
+Leek, 1.99, /static/img/leek.jpg

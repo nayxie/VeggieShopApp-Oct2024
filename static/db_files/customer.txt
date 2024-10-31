@@ -1,0 +1,5 @@
+Moe, Mohonie, moe_m, 123456, 16 Puriri Avenue Auckland, 100
+Dean, Mackenzie, dean_m, 123456, 4223 Great North Road Auckland, 100
+Freddie, Linenmen, fred_l, 123456, 1A St Mary's Bay Auckland, 100
+Jane, Chang, jane_c, 123456, 67 View Road Auckland, 100
+Nathan, Xie, nathan_x, 123456, 168 Fruitvale Street Auckland, 100

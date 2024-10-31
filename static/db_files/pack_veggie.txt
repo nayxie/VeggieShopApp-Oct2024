@@ -1,0 +1,4 @@
+Coriander, 4.69, /static/img/coriander.jpg
+Garlic, 4.49, /static/img/garlic.jpg
+Lettuce, 3.29, /static/img/lettuce.jpg
+Tomato, 6.99, /static/img/tomato.jpg
