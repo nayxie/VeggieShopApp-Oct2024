@@ -5,7 +5,7 @@ This project marks my first independent development of a full-stack web applicat
 The technology stack includes `Python with Flask`, `SQLAlchemy`, `Jinja templating`, `HTML`, `Bootstrap`, `CSS`, `JavaScript`, and `MySQL`, with `Pytest` used for testing. This stack enabled the creation of a responsive and maintainable application that manages core functionalities of a vegetable shop.
 
 **Test accounts:** 
-customer: moe_m(pw:12345); corporate customer: doe_m(pw:12345); staff: steve_j(pw:12345)
+customer: moe_m (pw:12345); corporate customer: doe_m (pw:12345); staff: steve_j (pw:12345)
 
 ## :tada: Layered Architectural Design
 
