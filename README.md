@@ -9,7 +9,7 @@ The technology stack includes `Python with Flask`, `SQLAlchemy`, `Jinja templati
 - corporate customer: doe_m (pw:12345)
 - staff: steve_j (pw:12345)
 
-## :tada: Layered Architectural Design
+## :rocket: Layered Architectural Design
 
 The application follows a `layered architectural design`. Each layer is separated according to best practices, making the architecture clean, modular, and easy to maintain. 
 
@@ -35,7 +35,7 @@ The application follows a `layered architectural design`. Each layer is separate
 - Technology: Bootstrap, HTML, CSS, JavaScript
 - Role: Manages the user interface, providing an interactive and responsive experience to end-users.
 
-## :gift_heart: Functionalities
+## :star: Functionalities
 
 **Customer Features**
 - Authentication: Log in and log out of their account securely.
@@ -52,11 +52,11 @@ The application follows a `layered architectural design`. Each layer is separate
 - Sales Reporting:Generate reports on total sales for the week, month, and year.
 - Product Insights: View the most popular items based on sales and customer demand.
 
-## :earth_asia: Data Modelling
+## :key: Data Modelling
 
 <img width="769" alt="Screenshot 2024-10-31 at 16 21 15" src="https://github.com/user-attachments/assets/fc8d74db-b726-452b-8f13-fb23fc153f57">
 
-## :earth_asia: UI Screenshots
+## :dragon_face: UI Screenshots
 
 <img width="894" alt="Screenshot 2024-10-31 at 16 07 58" src="https://github.com/user-attachments/assets/c05ad3a7-f612-4a8c-a19f-8108c0c56537">
 <img width="894" alt="Screenshot 2024-10-31 at 16 09 10" src="https://github.com/user-attachments/assets/0d300f4c-163c-42a1-9343-98fafc5d1ad9">
