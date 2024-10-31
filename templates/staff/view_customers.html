@@ -1,0 +1,70 @@
+{% extends "staff/base.html" %}
+{% block title %}All Customers{% endblock %}
+
+{% block main %}
+<div class="container my-5">
+    <main>
+        <div class="row g-5">
+            <div class="col-md-12">
+                <!-- Regular Customers Section -->
+                <h3 class="mb-3">Regular Customers</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="align-top">
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Credit Limit</th>
+                            <th scope="col">Outstanding</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in regular_customer_list %}
+                        <tr>
+                            <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                            <td>{{ customer.username }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>${{ customer.balance }}</td>
+                            <td>${{ customer.credit_limit }}</td>
+                            <td>${{ customer.owing }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr class="my-4">
+
+                <!-- Corporate Customers Section -->
+                <h3 class="mb-3">Corporate Customers</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Credit Limit</th>
+                            <th scope="col">Outstanding</th>
+                            <th scope="col">Discount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in corporate_customer_list %}
+                        <tr>
+                            <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+                            <td>{{ customer.username }}</td>
+                            <td>{{ customer.address }}</td>
+                            <td>${{ customer.balance }}</td>
+                            <td>${{ customer.credit_limit }}</td>
+                            <td>${{ customer.owing }}</td>
+                            <td>{{ customer.discount }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

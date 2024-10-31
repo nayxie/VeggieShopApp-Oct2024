@@ -1,0 +1,74 @@
+{% extends "staff/base.html" %}
+{% block title %}All Orders{% endblock %}
+
+{% block main %}
+<div class="container my-5">
+    <main>
+        <div class="row g-5">
+            <div class="col-md-12">
+                <!-- Current Orders Section -->
+                <h3 class="mb-3">Current Orders</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Delivery</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_list %}
+                            {% if order.status == 'processing' %}
+                            <tr>
+                                <td>{{ order.date }}</td>
+                                <td>{{ order.first_name }} {{ order.last_name }}</td>
+                                <td>{{ order.username }}</td>
+                                <td>{{ order.delivery }}</td>
+                                <td>${{ order.total }}</td>
+                                <td>
+                                    <a href="/staff/process_order/{{ order.id }}/" class="btn orange-button">Process order</a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <hr class="my-4">
+
+                <!-- Previous Orders Section -->
+                <h3 class="mb-3">Previous Orders</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Delivery</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_list %}
+                            {% if order.status != 'processing' %}
+                            <tr>
+                                <td>{{ order.date }}</td>
+                                <td>{{ order.first_name }} {{ order.last_name }}</td>
+                                <td>{{ order.username }}</td>
+                                <td>{{ order.delivery }}</td>
+                                <td>{{ order.status }}</td>
+                                <td>${{ order.total }}</td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

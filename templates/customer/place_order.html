@@ -1,0 +1,201 @@
+{% extends "customer/base.html" %}
+{% block title %}Place Order{% endblock %}
+
+{% block main %}
+<div class="container my-5">
+    <main>
+      <div class="row g-5">
+        <!-- Cart Summary -->
+        <div class="col-md-5 col-lg-4 order-md-last">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary" style="color: #044B25 !important;">My Cart</span>
+            <span class="badge rounded-pill" style="background-color:  #E5871E;">{{ cart_summary['quantity'] }}</span>
+            </h4>
+            <ul class="list-group mb-3">
+            {% for item in cart_details.values() %}
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                <h6 class="my-0">{{ item['name'] }}</h6>
+                <small class="text-muted">{{ item['quantity'] }} {{ item['unit'] }}</small>
+                </div>
+                <span class="text-muted">${{ item['subtotal'] }}</span>
+            </li>
+            {% endfor %}
+        
+            {% if user_profile['user_type'] == 'corporate_customer' %}
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                <h6 class="my-0">{{ user_profile['discount'] }} discount</h6>
+                </div>
+                <span class="text-muted">- ${{ cart_summary['discounted_amount'] }}</span>
+            </li>
+            {% endif %}  
+            <!-- Delivery Fee -->
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                <h6 class="my-0" id="deliveryLabel">Pick up</h6>
+                </div>
+                <span class="text-muted" id="deliveryFee">$0.00</span>
+            </li>  
+            <!-- Total Amount -->
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Total</span>
+                <strong id="totalWithDelivery">${{ cart_summary['total'] }}</strong>
+            </li>
+            </ul>      
+            <!-- Hidden element to store the subtotal -->
+            <span id="subtotal" data-subtotal="{{ cart_summary['total'] }}" style="display: none;"></span>
+        </div>
+        <!-- Check out section -->
+        <div class="col-md-7 col-lg-8">
+          <form class="needs-validation" novalidate method="POST" action="/customer/place_order/">
+            <h3 class="mb-3">Billing Address</h3>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">First name</label>
+                <input type="text" class="form-control" id="firstName" value="{{ user_profile['first_name'] }}" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="lastName" value="{{ user_profile['last_name'] }}" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+              <div class="col-12">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" value="{{ user_profile['address'] if user_profile['address'] else '' }}" 
+                placeholder="1234 Main St" required>
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+            </div>
+            <!-- Delivery -->
+            <hr class="my-4">
+            <h3 class="mb-3">Delivery</h3>
+            <div class="col-md-5">
+                <label for="deliveryOption" class="form-label">Choose a delivery option</label>
+                <select class="form-select" id="deliveryOption" name="deliveryOption" required>
+                    <option value="delivery">Delivery ($10)</option>
+                    <option value="pickup" selected>Pick up (free)</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a delivery option.
+                </div>
+            </div>          
+            <hr class="my-4">
+            <!-- Payment -->
+            <h3 class="mb-3">Payment</h3>
+            <div class="my-3">
+              <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" value="credit" required>
+                <label class="form-check-label" for="credit">Credit card</label>
+              </div>
+              <div class="form-check">
+                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" value="debit" required>
+                <label class="form-check-label" for="debit">Debit card</label>
+              </div>
+              <div class="form-check">
+                <input id="account" name="paymentMethod" type="radio" class="form-check-input" value="account" required>
+                <label class="form-check-label" for="account">Account</label>
+              </div> 
+            </div>
+            <!-- Credit Card Fields -->
+            <div id="creditCardFields" style="display: none;">
+                <div class="row gy-3">
+                <div class="col-md-6">
+                    <label for="cc-number" class="form-label">Card Number</label>
+                    <input type="text" class="form-control" id="cc-number" name="cc-number" placeholder="13-19 digits" required>
+                    <div class="invalid-feedback">
+                    Card number is required
+                    </div>
+                </div>          
+                <div class="col-md-6">
+                    <label for="cc-type" class="form-label">Card Type</label>
+                    <select class="form-select" id="cc-type" name="cc-type" required>
+                    <option value="">Choose...</option>
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    </select>
+                    <div class="invalid-feedback">
+                    Please select a card type.
+                    </div>
+                </div>           
+                <div class="col-md-6">
+                    <label for="cc-expiration" class="form-label">Expiration Date</label>
+                    <input type="text" class="form-control" id="cc-expiration" name="cc-expiration" placeholder="DD-MM-YYYY" required>
+                    <div class="invalid-feedback">
+                    Expiration date required
+                    </div>
+                </div>
+                </div>
+            </div>           
+            <!-- Debit Card Fields -->
+            <div id="debitCardFields" style="display: none;">
+              <div class="row gy-3">
+                <div class="col-md-6">
+                  <label for="debit-card-number" class="form-label">Card Number</label>
+                  <input type="text" class="form-control" id="debit-card-number" name="debit-card-number" placeholder="13-19 digits" required>
+                  <div class="invalid-feedback">
+                    Card number is required
+                  </div>
+                </div>
+            
+                <div class="col-md-6">
+                  <label for="bank-option" class="form-label">Bank</label>
+                  <select class="form-select" id="bank-option" name="bank-option" required>
+                    <option value="">Choose...</option>
+                    <option value="ANZ">ANZ</option>
+                    <option value="BNZ">BNZ</option>
+                    <option value="ASB">ASB</option>
+                    <option value="Kiwibank">Kiwibank</option>
+                    <option value="Westpac">Westpac</option>
+                    <option value="others">Others: please specify</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select your bank.
+                  </div>
+                </div>           
+                <!-- Additional Input Field for 'Others' -->
+                <div class="col-md-6" id="other-bank-name-field" style="display: none;">
+                  <label for="other-bank-name" class="form-label">Specify Bank Name</label>
+                  <input type="text" class="form-control" id="other-bank-name" name="other-bank-name">
+                  <div class="invalid-feedback">
+                    Please specify your bank name.
+                  </div>
+                </div>
+              </div>
+            </div>          
+            <!-- Account Fields -->
+            <div id="accountFields" style="display: none;">
+              <div class="row gy-3">
+                <div class="col-md-6">
+                  <label class="form-label">Account Balance</label>
+                  <input type="text" class="form-control" value="${{ user_profile['balance'] }}" readonly>
+                </div>       
+                <div class="col-md-6">
+                  <label class="form-label">Available Credit</label>
+                  <input type="text" class="form-control" value="${{ user_profile['available_credit'] }}" readonly>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4">
+            <a href="/customer/start_new_order/" class="btn btn-lg dark-green-button" style="width: 49%;">Start a new order</a>
+            <button class="btn btn-lg orange-button" style="width: 49%;" type="submit">Confirm payment</button>
+          </form>
+        </div>
+      </div>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Custom Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <!-- svg definitions -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19 11H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2Z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="cart" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M8.5 19a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 8.5 19ZM19 16H7a1 1 0 0 1 0-2h8.491a3.013 3.013 0 0 0 2.885-2.176l1.585-5.55A1 1 0 0 0 19 5H6.74a3.007 3.007 0 0 0-2.82-2H3a1 1 0 0 0 0 2h.921a1.005 1.005 0 0 1 .962.725l.155.545v.005l1.641 5.742A3 3 0 0 0 7 18h12a1 1 0 0 0 0-2Zm-1.326-9l-1.22 4.274a1.005 1.005 0 0 1-.963.726H8.754l-.255-.892L7.326 7ZM16.5 19a1.5 1.5 0 1 0 1.5 1.5a1.5 1.5 0 0 0-1.5-1.5Z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-solid" viewBox="0 0 15 15">
+        <path fill="currentColor" d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="search" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M15.71 12.71a6 6 0 1 0-7.42 0a10 10 0 0 0-6.22 8.18a1 1 0 0 0 2 .22a8 8 0 0 1 15.9 0a1 1 0 0 0 1 .89h.11a1 1 0 0 0 .88-1.1a10 10 0 0 0-6.25-8.19ZM12 12a4 4 0 1 1 4-4a4 4 0 0 1-4 4Z"/>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="close" viewBox="0 0 15 15">
+        <path fill="currentColor" d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z"/>
+      </symbol>
+    </defs>
+  </svg>
+  <!-- cart drop-down -->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary" style="color: #044B25 !important;">My Cart</span>
+          <span class="badge rounded-pill cart-badge" style="background-color:  #E5871E;">
+            {% if cart_summary %}
+              {{ cart_summary['quantity'] }}
+            {% else %}
+              0
+            {% endif %}
+          </span>
+        </h4>
+        <ul class="list-group cart-list mb-3">
+        {% if cart_details %}
+          {% for item in cart_details.values() %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">{{ item['name'] }}</h6>
+              <small class="text-muted">{{ item['quantity'] }} {{ item['unit'] }}</small>
+            </div>
+            <span class="text-muted">${{ item['subtotal'] }}</span>
+          </li>
+          {% endfor %}
+        {% endif %}
+        {% if cart_summary %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total </span>
+            {% if cart_summary['total_before_discount'] %}
+              <strong>${{ cart_summary['total_before_discount'] }}</strong>
+            {% else %}
+              <strong>${{ cart_summary['total'] }}</strong>
+            {% endif %}
+          </li>
+        {% endif %}
+        </ul>
+        <a href="/customer/place_order/" class="w-100 btn btn-lg orange-button" type="submit">Continue to checkout</a>
+      </div>
+    </div>
+  </div>
+  <!-- user bio drop-down -->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasUser" aria-labelledby="My Profile">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary" style="color: #044B25 !important;">My Profile</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Full Name</small>
+            <h6 class="my-0">{{ user_profile['first_name'] }} {{ user_profile['last_name'] }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Userame</small>
+            <h6 class="my-0">{{ user_profile['username'] }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Address</small>
+            <h6 class="my-0 text-end">{{ user_profile['address'] }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Account Blance</small>
+            <h6 class="my-0">${{ user_profile['balance'] }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Outstanding Blance</small>
+            <h6 class="my-0">${{ user_profile['owing'] }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Available Credit</small>
+            <h6 class="my-0">${{ user_profile['available_credit'] }}</h6>
+          </li>
+        {% if user_profile['user_type'] == 'corporate_customer' %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <small class="text-body-secondary">Discount</small>
+            <h6 class="my-0">{{ user_profile['discount'] }}</h6>
+          </li>
+        {% endif %}
+        </ul>
+        <a href="/logout/" class="w-100 btn btn-lg orange-button">Log out</a>
+      </div>
+    </div>
+  </div>
+  <!-- top navigation bar -->
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <!-- logo -->
+      <div class="col-12 col-md-12 col-lg-2 d-flex justify-content-center">
+        <a href="/customer/dashboard/"><img id="logo" src="{{ url_for('static', filename='img/logo.png') }}" alt="logo", height="130px"></a>
+      </div>
+      <!-- navigation links -->
+      <ul class="nav col-12 col-md-12 col-lg-8 mb-2 justify-content-center mb-md-0">
+        <li><a href="/customer/dashboard/" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="/customer/dashboard/" class="nav-link px-2 link-dark">Vegetable Collection</a></li>
+        <li><a href="/customer/view_orders/" class="nav-link px-2 link-dark">My Orders</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">My Cart</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">My Profile</a></li>
+      </ul>
+      <!-- cart and user svg -->
+      <div class="col-12 col-md-12 col-lg-2 d-flex justify-content-center">
+        <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+          <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#cart"></use></svg>
+          <span class="position-absolute translate-middle badge cart-badge rounded-circle pt-2" style="background-color:  #E5871E;">
+          {% if cart_summary %}
+            {{ cart_summary['quantity'] }}
+          {% else %}
+            0
+          {% endif %}
+          </span>
+        </a>
+        <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasUser" aria-controls="offcanvasUser">
+          <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="#user"></use></svg>
+        </a>
+      </div>
+    </header>
+  </div>
+  <!-- flash messages -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <span>{{ message }}</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+
+      <div class="col-sm-4">
+        {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <span>{{ message }}</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+
+      <div class="col-sm-4">
+        {% with messages = get_flashed_messages(category_filter=["danger"]) %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <span>{{ message }}</span>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div>
+    </div>
+  </div>
+  <main>
+    {% block main %}{% endblock %}
+  </main>
+  <!-- footer -->
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-12 d-flex align-items-center">
+        <a href="#" class="mb-3 me-3 mb-md-0 text-muted text-decoration-none lh-1">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo", height="24px">
+        </a>
+        <span class="mb-3 mb-md-0 text-muted">© 2024 Nanyue (Nay) Xie</span>
+      </div>
+    </footer>
+  </div>
+  <!-- JS -->
+  <script src="/static/jquery-1.11.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <script src="/static/plugins.js"></script>
+  <script src="/static/script.js"></script> 
+</body>
+</html>
