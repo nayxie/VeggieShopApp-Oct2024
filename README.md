@@ -9,8 +9,26 @@ customer: moe_m (pw:12345); corporate customer: doe_m (pw:12345); staff: steve_j
 
 ## :tada: Layered Architectural Design
 
-The application follows a layered architectural design. Each layer is separated according to best practices, making the architecture clean, modular, and easy to maintain. 
+The application follows a `layered architectural design`. Each layer is separated according to best practices, making the architecture clean, modular, and easy to maintain. 
 
 <img width="507" alt="Screenshot 2024-10-31 at 15 53 04" src="https://github.com/user-attachments/assets/10273f29-b768-4a21-8994-968a4146f963">
 
+**Database Layer**
+- Technology: MySQL
+- Role: Handles data storage, retrieval, and management.
 
+**Persistence Layer**
+- Technology: SQLAlchemy ORM models
+- Role: Provides an object-relational mapping that aligns closely with the domain models. Facilitates data interactions between the business layer and the database.
+
+**Business Layer**
+- Technology: Domain Models
+- Role: Encapsulates core business logic and rules specific to the veggie shop, modelling key entities with attributes and methods within the application.
+
+**Application Layer**
+- Technology: Flask Routers with Python
+- Role: Handles application routing, request processing, data validation, and delegation of business logic execution. Acts as a bridge between the presentation layer and business layer to manage user requests and responses.
+
+**Presentation Layer**
+- Technology: Bootstrap, HTML, CSS, JavaScript
+- Role: Manages the user interface, providing an interactive and responsive experience to end-users.
