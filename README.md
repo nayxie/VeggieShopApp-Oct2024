@@ -32,3 +32,20 @@ The application follows a `layered architectural design`. Each layer is separate
 **Presentation Layer**
 - Technology: Bootstrap, HTML, CSS, JavaScript
 - Role: Manages the user interface, providing an interactive and responsive experience to end-users.
+
+## :gift_heart: Functionalities
+
+**Customer Features**
+- Authentication: Log in and log out of their account securely.
+- Product Viewing: Browse available vegetables and premade boxes.
+- Order Placement: Place orders for individual vegetables or premade boxes.At checkout, customers can pay using a credit card, debit card, or charge the amount to their account.
+- Order Management: View current and previous order details. Cancel an order if it has not yet been fulfilled.
+- Account Management: View their own personal account details.
+
+**Staff Features**
+- Authentication: Log in and log out of their account securely.
+- Product Viewing: Access details of all vegetables and premade boxes.
+- Order Management: View all current and previous orders and their details. Update the status of orders as they progress.
+- Customer Management: Access details of all customers. Generate a list of all customers in the system.
+- Sales Reporting:Generate reports on total sales for the week, month, and year.
+- Product Insights: View the most popular items based on sales and customer demand.
