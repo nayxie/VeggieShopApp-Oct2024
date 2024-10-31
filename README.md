@@ -11,5 +11,6 @@ customer: moe_m (pw:12345); corporate customer: doe_m (pw:12345); staff: steve_j
 
 The application follows a layered architectural design. Each layer is separated according to best practices, making the architecture clean, modular, and easy to maintain. 
 
+<img width="507" alt="Screenshot 2024-10-31 at 15 53 04" src="https://github.com/user-attachments/assets/10273f29-b768-4a21-8994-968a4146f963">
 
 
