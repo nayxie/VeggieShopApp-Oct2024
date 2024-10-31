@@ -56,12 +56,12 @@ The application follows a `layered architectural design`. Each layer is separate
 
 ## :earth_asia: UI Screenshots
 
-<img width="938" alt="Screenshot 2024-10-31 at 16 07 58" src="https://github.com/user-attachments/assets/c05ad3a7-f612-4a8c-a19f-8108c0c56537">
-<img width="964" alt="Screenshot 2024-10-31 at 16 09 10" src="https://github.com/user-attachments/assets/0d300f4c-163c-42a1-9343-98fafc5d1ad9">
+<img width="894" alt="Screenshot 2024-10-31 at 16 07 58" src="https://github.com/user-attachments/assets/c05ad3a7-f612-4a8c-a19f-8108c0c56537">
+<img width="894" alt="Screenshot 2024-10-31 at 16 09 10" src="https://github.com/user-attachments/assets/0d300f4c-163c-42a1-9343-98fafc5d1ad9">
 <img width="894" alt="Screenshot 2024-10-31 at 16 11 13" src="https://github.com/user-attachments/assets/0c5a1f29-c543-4809-91f2-04509b17ea2b">
-<img width="763" alt="Screenshot 2024-10-31 at 16 12 05" src="https://github.com/user-attachments/assets/e0383370-16fa-453a-aba3-c868f879078b">
-<img width="745" alt="Screenshot 2024-10-31 at 16 13 36" src="https://github.com/user-attachments/assets/735eac4e-8b70-428c-b054-a516803efc21">
-<img width="762" alt="Screenshot 2024-10-31 at 16 14 21" src="https://github.com/user-attachments/assets/570a4145-8d03-4098-bb4d-cdbd67fbe40d">
+<img width="894" alt="Screenshot 2024-10-31 at 16 12 05" src="https://github.com/user-attachments/assets/e0383370-16fa-453a-aba3-c868f879078b">
+<img width="894" alt="Screenshot 2024-10-31 at 16 13 36" src="https://github.com/user-attachments/assets/735eac4e-8b70-428c-b054-a516803efc21">
+<img width="894" alt="Screenshot 2024-10-31 at 16 14 21" src="https://github.com/user-attachments/assets/570a4145-8d03-4098-bb4d-cdbd67fbe40d">
 
 
 
