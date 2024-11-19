@@ -1,6 +1,6 @@
 # Veggie Shop Management System
 
-This project marks my first independent development of a full-stack web application, completed over 4 weeks in October 2024. Developed as the final assessment for the COMP642 Advanced Programming course at Lincoln University, the application implements a `Domain-Driven Design` approach, integrating domain models, database models, routers, services, and utilities.
+This project marks my first independent development of a full-stack web application, completed over 4 weeks in October 2024. Developed as the final assessment for the COMP642 Advanced Programming course at Lincoln University, the application implements a `Layered Architecture` approach, integrating domain models, database models, routers, services, and utilities.
 
 The technology stack includes `Python with Flask`, `SQLAlchemy`, `Jinja templating`, `HTML`, `Bootstrap`, `CSS`, `JavaScript`, and `MySQL`, with `Pytest` used for testing. This stack enabled the creation of a responsive and maintainable application that manages core functionalities of a vegetable shop.
 
@@ -11,7 +11,7 @@ The technology stack includes `Python with Flask`, `SQLAlchemy`, `Jinja templati
 
 ## :rocket: Layered Architectural Design
 
-The application follows a `layered architectural design`. Each layer is separated according to best practices, making the architecture clean, modular, and easy to maintain. 
+The application follows a `Layered Architectural Design`. Each layer is separated according to best practices, making the architecture clean, modular, and easy to maintain. 
 
 <img width="507" alt="Screenshot 2024-10-31 at 15 53 04" src="https://github.com/user-attachments/assets/10273f29-b768-4a21-8994-968a4146f963">
 
